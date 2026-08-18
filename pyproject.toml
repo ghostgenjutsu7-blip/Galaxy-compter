@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "galaxy-computer"
+version = "1.0.0"
+description = "Galaxy Computer v1 — the mind that remembers everything. An open-source AI agent CLI system."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [{name = "Galaxy Computer"}]
+keywords = ["ai", "agent", "cli", "memory", "llm"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "typer>=0.9",
+    "rich>=13.0",
+    "prompt_toolkit>=3.0",
+    "openai>=1.0",
+    "httpx>=0.25",
+    "tiktoken>=0.5",
+    "loguru>=0.7",
+    "pydantic>=2.0",
+    "cryptography>=41.0",
+    "keyring>=24.0",
+    "rank-bm25>=0.2",
+    "watchfiles>=0.21",
+    "schedule>=1.2",
+    "aiofiles>=23.0",
+    # Phase 1: real Playwright browser tools (browser_navigate/click/fill/snapshot/
+    # screenshot/extract/console/tabs/upload/connect). One-time post-install step:
+    #   python -m playwright install chromium
+    "playwright>=1.40",
+    # Phase 2: HTML parsing for DuckDuckGo web_search; curl_cffi is the TLS-
+    # impersonating fallback for Cloudflare-protected sites and DDG's anti-bot
+    # challenge page
+    "beautifulsoup4>=4.12",
+    "curl_cffi>=0.7",
+    # Phase 3: pandas for pandas_query/data_validate; PIL+pytesseract for image_ocr
+    # (also requires system `tesseract` binary on PATH)
+    "pandas>=2.0",
+    "pillow>=10.0",
+    "pytesseract>=0.3.10",
+]
+
+[project.optional-dependencies]
+composio = ["composio-core>=0.5", "composio-langchain"]
+telegram = ["python-telegram-bot>=21.0"]
+tree-sitter = ["tree-sitter>=0.20", "tree-sitter-python", "tree-sitter-javascript", "tree-sitter-typescript", "tree-sitter-rust", "tree-sitter-go"]
+dev = ["pytest>=7.0", "pytest-asyncio>=0.21", "pytest-cov>=4.0"]
+
+[project.scripts]
+galaxy = "cli.repl:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["core", "providers", "connectors", "channels", "security", "concurrency", "failure", "context", "resources", "observability", "schema", "skill", "skills", "eval", "data", "storage", "cli"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

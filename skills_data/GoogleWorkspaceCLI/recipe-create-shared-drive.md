@@ -1,0 +1,23 @@
+---
+name: recipe-create-shared-drive
+source: GoogleWorkspaceCLI
+version: 1.0.0
+description: 'Create a Google Shared Drive and add members with appropriate roles.'
+tags: ["google-workspace", "recipe"]
+triggers: ["recipe create shared drive"]
+license: Apache-2.0
+target_agent: file
+category: file_management
+---
+
+# Create and Configure a Shared Drive
+
+> **PREREQUISITE:** Load the following skills to execute this recipe: `gws-drive`
+
+Create a Google Shared Drive and add members with appropriate roles.
+
+## Steps
+
+1. Create shared drive: `gws drive drives create --params '{"requestId": "unique-id-123"}' --json '{"name": "Project X"}'`
+2. Add a member: `gws drive permissions create --params '{"fileId": "DRIVE_ID", "supportsAllDrives": true}' --json '{"role": "writer", "type": "user", "emailAddress": "member@company.com"}'`
+3. List members: `gws drive permissions list --params '{"fileId": "DRIVE_ID", "supportsAllDrives": true}'`

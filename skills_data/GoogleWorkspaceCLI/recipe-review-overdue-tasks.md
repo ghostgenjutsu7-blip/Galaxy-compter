@@ -1,0 +1,23 @@
+---
+name: recipe-review-overdue-tasks
+source: GoogleWorkspaceCLI
+version: 1.0.0
+description: 'Find Google Tasks that are past due and need attention.'
+tags: ["google-workspace", "recipe"]
+triggers: ["recipe review overdue tasks"]
+license: Apache-2.0
+target_agent: file
+category: file_management
+---
+
+# Review Overdue Tasks
+
+> **PREREQUISITE:** Load the following skills to execute this recipe: `gws-tasks`
+
+Find Google Tasks that are past due and need attention.
+
+## Steps
+
+1. List task lists: `gws tasks tasklists list --format table`
+2. List tasks with status: `gws tasks tasks list --params '{"tasklist": "TASKLIST_ID", "showCompleted": false}' --format table`
+3. Review due dates and prioritize overdue items

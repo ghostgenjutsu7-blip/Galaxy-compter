@@ -1,0 +1,23 @@
+---
+name: recipe-create-classroom-course
+source: GoogleWorkspaceCLI
+version: 1.0.0
+description: 'Create a Google Classroom course and invite students.'
+tags: ["google-workspace", "recipe"]
+triggers: ["recipe create classroom course"]
+license: Apache-2.0
+target_agent: file
+category: file_management
+---
+
+# Create a Google Classroom Course
+
+> **PREREQUISITE:** Load the following skills to execute this recipe: `gws-classroom`
+
+Create a Google Classroom course and invite students.
+
+## Steps
+
+1. Create the course: `gws classroom courses create --json '{"name": "Introduction to CS", "section": "Period 1", "room": "Room 101", "ownerId": "me"}'`
+2. Invite a student: `gws classroom invitations create --json '{"courseId": "COURSE_ID", "userId": "student@school.edu", "role": "STUDENT"}'`
+3. List enrolled students: `gws classroom courses students list --params '{"courseId": "COURSE_ID"}' --format table`
